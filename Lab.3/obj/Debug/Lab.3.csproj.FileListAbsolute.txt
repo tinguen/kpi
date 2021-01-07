@@ -1,0 +1,17 @@
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\bin\Debug\Lab.3.dll
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\bin\Debug\Lab.3.pdb
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\bin\Debug\IIG.PasswordHashingUtils.dll
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\bin\Debug\IIG.PasswordHashingUtils.pdb
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\bin\Debug\IIG.PasswordHashingUtils.xml
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\obj\Debug\Lab.3.csprojAssemblyReference.cache
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\obj\Debug\Lab.3.csproj.CoreCompileInputs.cache
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\obj\Debug\Lab.3.csproj.CopyComplete
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\obj\Debug\Lab.3.dll
+C:\Users\Tin\Desktop\IIG.PasswordHashingUtils-master\Lab.3\obj\Debug\Lab.3.pdb
