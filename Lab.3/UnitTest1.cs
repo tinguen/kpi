@@ -9,56 +9,67 @@ namespace Lab._3
     {
         [TestMethod]
         public void TestEmptyStringHash() {
-            Assert.IsNotNull(PasswordHasher.GetHash(""));
-            Assert.AreNotEqual(PasswordHasher.GetHash(""), "");
+            string empty_string = "";
+
+            Assert.IsNotNull(PasswordHasher.GetHash(empty_string));
+            Assert.AreNotEqual(PasswordHasher.GetHash(empty_string), "");
         }
 
         [TestMethod]
         public void TestGetHash()
         {
-            Assert.IsNotNull(PasswordHasher.GetHash("asd"));
-            Assert.AreNotEqual(PasswordHasher.GetHash("asd"), "");
+            string password = "asd";
+            Assert.IsNotNull(PasswordHasher.GetHash(password));
+            Assert.AreNotEqual(PasswordHasher.GetHash(password), "");
         }
 
         [TestMethod]
         public void TestNumberGetHash()
         {
-            Assert.IsNotNull(PasswordHasher.GetHash("123"));
-            Assert.AreNotEqual(PasswordHasher.GetHash("123"), "");
+            string number_password = "123";
+            Assert.IsNotNull(PasswordHasher.GetHash(number_password));
+            Assert.AreNotEqual(PasswordHasher.GetHash(number_password), "");
         }
 
         [TestMethod]
         public void TestSpacesGetHash()
         {
-            Assert.IsNotNull(PasswordHasher.GetHash("   "));
-            Assert.AreNotEqual(PasswordHasher.GetHash("   "), "");
+            string space_password = "   ";
+            Assert.IsNotNull(PasswordHasher.GetHash(space_password));
+            Assert.AreNotEqual(PasswordHasher.GetHash(space_password), "");
         }
 
         [TestMethod]
         public void TestCaseSensitivityGetHash()
         {
-            Assert.AreNotEqual(PasswordHasher.GetHash("hello"), PasswordHasher.GetHash("HELLO"));
-            Assert.AreEqual(PasswordHasher.GetHash("hello"), PasswordHasher.GetHash("hello"));
+            string lowercase = "hello";
+            string uppercase = "HELLO";
+            Assert.AreNotEqual(PasswordHasher.GetHash(lowercase), PasswordHasher.GetHash(uppercase));
+            Assert.AreEqual(PasswordHasher.GetHash(lowercase), PasswordHasher.GetHash(lowercase));
         }
 
         [TestMethod]
         public void TestUniqueGetHash()
         {
-            Assert.AreNotEqual(PasswordHasher.GetHash("hello"), PasswordHasher.GetHash("abcd123"));
+            string password1 = "hello";
+            string password2 = "abcd123";
+            Assert.AreNotEqual(PasswordHasher.GetHash(password1), PasswordHasher.GetHash(password2));
         }
 
         [TestMethod]
         public void TestGetHashUkrainian()
         {
-            Assert.IsNotNull(PasswordHasher.GetHash("раоапо"));
-            Assert.AreNotEqual(PasswordHasher.GetHash("раоапо"), "");
+            string ukrainian = "раоапо";
+            Assert.IsNotNull(PasswordHasher.GetHash(ukrainian));
+            Assert.AreNotEqual(PasswordHasher.GetHash(ukrainian), "");
         }
 
         [TestMethod]
         public void TestGetHashChinese()
         {
-            Assert.IsNotNull(PasswordHasher.GetHash("汉语"));
-            Assert.AreNotEqual(PasswordHasher.GetHash("汉语"), "");
+            string chinese = "汉语";
+            Assert.IsNotNull(PasswordHasher.GetHash(chinese));
+            Assert.AreNotEqual(PasswordHasher.GetHash(chinese), "");
         }
 
         [TestMethod]
@@ -66,35 +77,44 @@ namespace Lab._3
         {
             string wrongSalt1 = "";
             string wrongSalt2 = null;
-            string hash = PasswordHasher.GetHash("汉语");
+            string password = "汉语";
+            string hash = PasswordHasher.GetHash(password);
             PasswordHasher.Init(wrongSalt1, 65521);
-            Assert.AreEqual(hash, PasswordHasher.GetHash("汉语"));
+            Assert.AreEqual(hash, PasswordHasher.GetHash(password));
             PasswordHasher.Init(wrongSalt2, 65521);
-            Assert.AreEqual(hash, PasswordHasher.GetHash("汉语"));
+            Assert.AreEqual(hash, PasswordHasher.GetHash(password));
         }
 
         [TestMethod]
         public void TestInitSalt()
         {
-            string hash = PasswordHasher.GetHash("汉语");
-            PasswordHasher.Init("somesalt", 65521);
-            Assert.AreNotEqual(hash, PasswordHasher.GetHash("汉语"));
+            string password = "汉语";
+            string salt = "somesalt";
+            string hash = PasswordHasher.GetHash(password);
+            PasswordHasher.Init(salt, 65521);
+            Assert.AreNotEqual(hash, PasswordHasher.GetHash(password));
         }
 
         [TestMethod]
         public void TestInitIncorrectAdler32Value()
         {
-            string hash = PasswordHasher.GetHash("汉语");
-            PasswordHasher.Init("some salt", 0);
-            Assert.AreEqual(hash, PasswordHasher.GetHash("汉语"));
+            string password = "汉语";
+            string salt = "some salt";
+
+            string hash = PasswordHasher.GetHash(password);
+            PasswordHasher.Init(salt, 0);
+            Assert.AreEqual(hash, PasswordHasher.GetHash(password));
         }
 
         [TestMethod]
         public void TestInitAdler32()
         {
-            string hash = PasswordHasher.GetHash("汉语");
-            PasswordHasher.Init("some salt", 1000);
-            Assert.AreNotEqual(hash, PasswordHasher.GetHash("汉语"));
+            string salt = "some salt";
+            string password = "汉语";
+            uint adler32 = 1000;
+            string hash = PasswordHasher.GetHash(password);
+            PasswordHasher.Init(salt, adler32);
+            Assert.AreNotEqual(hash, PasswordHasher.GetHash(password));
         }
 
         [TestMethod]
@@ -102,30 +122,41 @@ namespace Lab._3
         {
             string wrongSalt1 = "";
             string wrongSalt2 = null;
-            string hash = PasswordHasher.GetHash("汉语");
-            Assert.AreEqual(hash, PasswordHasher.GetHash("汉语", wrongSalt1, 65521));
-            Assert.AreEqual(hash, PasswordHasher.GetHash("汉语", wrongSalt2, 65521));
+            string password = "汉语";
+            uint adler32 = 65521;
+            string hash = PasswordHasher.GetHash(password);
+            Assert.AreEqual(hash, PasswordHasher.GetHash(password, wrongSalt1, adler32));
+            Assert.AreEqual(hash, PasswordHasher.GetHash(password, wrongSalt2, adler32));
         }
 
         [TestMethod]
         public void TestGetHashSalt()
         {
-            string hash = PasswordHasher.GetHash("汉语");
-            Assert.AreNotEqual(hash, PasswordHasher.GetHash("汉语", "somesalt", 65521));
+            string password = "汉语";
+            string salt = "somesalt";
+            uint adler32 = 65521;
+            string hash = PasswordHasher.GetHash(password);
+            Assert.AreNotEqual(hash, PasswordHasher.GetHash(password, salt, adler32));
         }
 
         [TestMethod]
         public void TestGetHashIncorrectAdler32Value()
         {
-            string hash = PasswordHasher.GetHash("汉语");
-            Assert.AreEqual(hash, PasswordHasher.GetHash("汉语", "some salt", 0));
+            string salt = "some salt";
+            string password = "汉语";
+            uint incorrect_adler32 = 0;
+            string hash = PasswordHasher.GetHash(password);
+            Assert.AreEqual(hash, PasswordHasher.GetHash(password, salt, incorrect_adler32));
         }
 
         [TestMethod]
         public void TestGetHashAdler32()
         {
-            string hash = PasswordHasher.GetHash("汉语");
-            Assert.AreNotEqual(hash, PasswordHasher.GetHash("汉语", "some salt", 1000));
+            string password = "汉语";
+            uint adler32 = 1000;
+            string salt = "some salt";
+            string hash = PasswordHasher.GetHash(password);
+            Assert.AreNotEqual(hash, PasswordHasher.GetHash(password, salt, adler32));
         }
     }
 }

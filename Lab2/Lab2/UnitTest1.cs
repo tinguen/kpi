@@ -7,25 +7,23 @@ namespace Lab2
     public class UnitTest1
     {
         [Fact]
-        public void testIntLengthInput()
-        {
-            MultipleBinaryFlag multipleBinaryFlag = new MultipleBinaryFlag(int.MaxValue, false);
-
-            Assert.False(multipleBinaryFlag.GetFlag());
-        }
-
-        [Fact]
         public void testLongLengthInput()
         {
-            MultipleBinaryFlag multipleBinaryFlag = new MultipleBinaryFlag(long.MaxValue, false);
+            MultipleBinaryFlag multipleBinaryFlag1 = new MultipleBinaryFlag(ulong.MaxValue, false);
+            MultipleBinaryFlag multipleBinaryFlag2 = new MultipleBinaryFlag(ulong.MaxValue - 1, false);
 
-            Assert.False(multipleBinaryFlag.GetFlag());
+            Assert.False(multipleBinaryFlag1.GetFlag());
+            Assert.False(multipleBinaryFlag2.GetFlag());
         }
 
         [Fact]
-        public void testNegativeLengthInput()
+        public void testMinimumLengthInput()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new MultipleBinaryFlag(ulong.MinValue, false));
+            MultipleBinaryFlag multipleBinaryFlag1 = new MultipleBinaryFlag(ulong.MinValue, false);
+            MultipleBinaryFlag multipleBinaryFlag2 = new MultipleBinaryFlag(ulong.MinValue + 1, false);
+
+            Assert.False(multipleBinaryFlag1.GetFlag());
+            Assert.False(multipleBinaryFlag2.GetFlag());
         }
 
         [Fact]
@@ -88,6 +86,14 @@ namespace Lab2
             multipleBinaryFlag.ResetFlag(0);
 
             Assert.False(multipleBinaryFlag.GetFlag());
+        }
+
+        [Fact]
+        public void testResetFlagThrowsError()
+        {
+            MultipleBinaryFlag multipleBinaryFlag = new MultipleBinaryFlag(10, true);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => multipleBinaryFlag.ResetFlag(10));
         }
     }
 }
