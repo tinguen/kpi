@@ -109,11 +109,45 @@ namespace Lab4
         [TestMethod]
         public void TestUpdateWrongCredentials()
         {
-            string login = "gol";
-            string password = "ssap";
+            string login = "somelogg";
+            string password = "somepass";
 
             Assert.IsTrue(authDatabaseUtils.AddCredentials(login, PasswordHasher.GetHash("password")));
             Assert.IsFalse(authDatabaseUtils.UpdateCredentials(login, PasswordHasher.GetHash(password), login, PasswordHasher.GetHash(password)));
+        }
+
+        [TestMethod]
+        public void TestUpdateSameCredentials()
+        {
+            string login = "hello";
+            string password = "ssap";
+
+            Assert.IsTrue(authDatabaseUtils.AddCredentials(login, PasswordHasher.GetHash(password)));
+            Assert.IsFalse(authDatabaseUtils.UpdateCredentials(login, PasswordHasher.GetHash(password), login, PasswordHasher.GetHash(password)));
+        }
+
+        [TestMethod]
+        public void TestUpdateRandomCredentials()
+        {
+            string login = "gol2";
+            string password = "ssap2";
+            string wrong_password_hash = "asdashdk";
+
+            Assert.IsTrue(authDatabaseUtils.AddCredentials(login, PasswordHasher.GetHash(password)));
+            Assert.IsFalse(authDatabaseUtils.UpdateCredentials(login, PasswordHasher.GetHash(password), login, wrong_password_hash));
+        }
+
+        [TestMethod]
+        public void TestUpdateCredentialsToExistingCredentials()
+        {
+            string login1 = "gol";
+            string password = "ssap";
+            string login2 = "login2";
+
+            Assert.IsTrue(authDatabaseUtils.AddCredentials(login1, PasswordHasher.GetHash(password)));
+            Assert.IsTrue(authDatabaseUtils.AddCredentials(login2, PasswordHasher.GetHash(password)));
+
+            Assert.IsFalse(authDatabaseUtils.UpdateCredentials(login1, PasswordHasher.GetHash(password), login2, PasswordHasher.GetHash(password)));
         }
 
         [TestMethod]

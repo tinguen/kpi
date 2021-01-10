@@ -10,6 +10,7 @@ namespace Lab4
     {
         string testFile = "./testFile.txt";
         string filledFile = "./filledFile.txt";
+        string readAllFile = "./readAllFile.txt";
 
         [TestCleanup]
         public void TestCleanup()
@@ -75,6 +76,51 @@ namespace Lab4
             {
                 Assert.AreEqual(binaryFlags[i].GetFlag().ToString(), results[i]);
             }
+        }
+
+        [TestMethod]
+        public void TestGetFlagFalseAfterSetFlag()
+        {
+            string expected = "True";
+
+            MultipleBinaryFlag flag = new MultipleBinaryFlag(44, false);
+
+            for (uint i = 0; i < 44; i++)
+            {
+                flag.SetFlag(i);
+            }
+
+            Assert.IsTrue(BaseFileWorker.Write(flag.GetFlag().ToString(), testFile));
+            Assert.AreEqual(expected, File.ReadAllText(testFile));
+        }
+
+        [TestMethod]
+        public void TestGetFlagFalseAfteResetFlag()
+        {
+            string expected = "False";
+
+            MultipleBinaryFlag flag = new MultipleBinaryFlag(100, true);
+
+            flag.ResetFlag(10);
+
+            Assert.IsTrue(BaseFileWorker.Write(flag.GetFlag().ToString(), testFile));
+            Assert.AreEqual(expected, File.ReadAllText(testFile));
+        }
+
+        [TestMethod]
+        public void TestReadAll()
+        {
+            MultipleBinaryFlag flag = new MultipleBinaryFlag(5, true);
+            Assert.AreEqual(flag.GetFlag().ToString(), BaseFileWorker.ReadAll(readAllFile));
+
+        }
+
+        [TestMethod]
+        public void TestReadlAllNotEqualGetFlag()
+        {
+            MultipleBinaryFlag flag = new MultipleBinaryFlag(5, true);
+            flag.ResetFlag(3);
+            Assert.AreNotEqual(flag.GetFlag().ToString(), BaseFileWorker.ReadAll(readAllFile));
         }
     }
 }
